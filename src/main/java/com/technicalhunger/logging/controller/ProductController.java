@@ -35,11 +35,12 @@ public class ProductController {
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getProduct(@PathVariable Long id){
 		
-		Optional<Product> product = productService.findById(id);
-		if(product.isPresent()) {
-			return new ResponseEntity<>(product.get(), HttpStatus.OK);
+		try{
+			Product product = productService.findById(id);
+			return new ResponseEntity(product, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			return new ResponseEntity(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
 	@PostMapping("/add")

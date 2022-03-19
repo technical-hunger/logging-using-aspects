@@ -10,7 +10,7 @@ public interface ProductService {
 
 	List<Product> findAll();
 	
-	Optional<Product> findById(long id);
+	Product findById(long id);
 	
 	Product save(Product product);
 }
